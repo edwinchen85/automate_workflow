@@ -1,0 +1,23 @@
+{
+  "name": "automate_workflow",
+  "version": "1.0.0",
+  "description": "Automate workflow using Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://edwinchen85.github.io/automate_workflow.git"
+  },
+  "keywords": [
+    "automation",
+    "workflow",
+    "gulp"
+  ],
+  "author": "Edwin Chen",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

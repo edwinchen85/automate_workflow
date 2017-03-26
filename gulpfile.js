@@ -7,12 +7,17 @@ gulp.task('hello', function() {
 
 gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')
-    .pipe(sass({
-      precision: 2  // Sets precision to 2
-    }))
+    .pipe(sass().on('error', errorHandler))
     .pipe(gulp.dest('app/css'));
 });
 
 gulp.task('watch', function() {
   gulp.watch('app.scss/**/*.scss', ['sass']);
 });
+
+function errorHandler(err) {
+  // Logs out error in the command line
+  console.log(err.toString());
+  // Ends the current pipe, so Gulp watch doesn't break
+  this.emit('end');
+}

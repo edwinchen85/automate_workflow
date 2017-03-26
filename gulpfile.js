@@ -1,13 +1,11 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-
-gulp.task('hello', function() {
-  console.log('Hello Edwin');
-});
+var plumber = require('gulp-plumber');
 
 gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')
-    .pipe(sass().on('error', errorHandler))
+    .pipe(customPlumber())
+    .pipe(sass())
     .pipe(gulp.dest('app/css'));
 });
 
@@ -15,9 +13,13 @@ gulp.task('watch', function() {
   gulp.watch('app.scss/**/*.scss', ['sass']);
 });
 
-function errorHandler(err) {
-  // Logs out error in the command line
-  console.log(err.toString());
-  // Ends the current pipe, so Gulp watch doesn't break
-  this.emit('end');
+function customPlumber() {
+  return plumber({
+    errorHandler: function(err) {
+      // Logs error in console
+      console.log(err.stack);
+      // Ends the current pipe, so Gulp watch doesn't break
+      this.emit('end');
+    }
+  });
 }

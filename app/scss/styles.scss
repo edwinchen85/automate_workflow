@@ -1,4 +1,5 @@
 @import "testing";
+@import "sprites";
 
 .testing {
   // Percentage is a Sass function
@@ -8,3 +9,8 @@
 .flex {
   display: flex;
 }
+
+// Create all normal sprites
+// @include sprites($spritesheet-sprites);
+// Create all normal and retina sprites
+@include retina-sprites($retina-groups);

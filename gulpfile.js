@@ -3,11 +3,13 @@ var sass = require('gulp-sass');
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
 var browserSync = require('browser-sync');
+var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')
     .pipe(customPlumber('Error Running Sass'))
     .pipe(sass())
+    .pipe(autoprefixer())
     .pipe(gulp.dest('app/css'))
     // Tells Browser Sync to reload files when task is done
     .pipe(browserSync.reload({

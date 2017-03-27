@@ -9,7 +9,10 @@ gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')
     .pipe(customPlumber('Error Running Sass'))
     .pipe(sass())
-    .pipe(autoprefixer())
+    .pipe(autoprefixer({
+      // Adds prefixes for IE8, IE9 and last 2 versions of all other browsers
+      browsers: ['ie 8-9', 'last 2 versions']
+    }))
     .pipe(gulp.dest('app/css'))
     // Tells Browser Sync to reload files when task is done
     .pipe(browserSync.reload({

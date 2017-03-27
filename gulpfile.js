@@ -5,6 +5,8 @@ var notify = require('gulp-notify');
 var browserSync = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
+var spritesmith = require('gulp.spritesmith');
+var gulpIf = require('gulp-if');
 
 gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')
@@ -34,6 +36,20 @@ gulp.task('browserSync', function() {
       baseDir: 'app'
     }
   });
+});
+
+gulp.task('sprites', function() {
+  gulp.src('app/images/sprites/**/*')
+  .pipe(spritesmith({
+    cssName: '_sprites.scss',
+    imgName: 'sprites.png',
+    imgPath: '../images/sprites.png',
+    retinaSrcFilter: 'app/images/sprites/*@2x.png',
+    retinaImgName: 'sprite@2x.png',
+    retinaImgPath: '../images/sprites@2x.png'
+  }))
+  .pipe(gulpIf('*.png', gulp.dest('app/images')))
+  .pipe(gulpIf('*.scss', gulp.dest('app/scss')));
 });
 
 function customPlumber(errTitle) {

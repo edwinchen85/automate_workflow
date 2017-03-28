@@ -1,0 +1,26 @@
+{
+  "name": "automate_workflow",
+  "description": "Automate workflow using Gulp",
+  "main": "index.js",
+  "authors": [
+    "Edwin Chen"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "automation",
+    "workflow",
+    "gulp"
+  ],
+  "homepage": "https://github.com/edwinchen85/automate_workflow",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

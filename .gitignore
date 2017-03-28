@@ -49,3 +49,4 @@ $RECYCLE.BIN/
 *.lnk
 
 /node_modules
+/app/bower_components

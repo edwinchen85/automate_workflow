@@ -1,5 +1,6 @@
 @import "testing";
 @import "sprites";
+@import "../bower_components/susy/sass/susy";
 
 .testing {
   // Percentage is a Sass function
@@ -14,3 +15,7 @@
 // @include sprites($spritesheet-sprites);
 // Create all normal and retina sprites
 @include retina-sprites($retina-groups);
+
+.susy-test {
+  @include span(2);
+}

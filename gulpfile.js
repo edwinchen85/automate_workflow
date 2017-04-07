@@ -9,6 +9,7 @@ var spritesmith = require('gulp.spritesmith');
 var gulpIf = require('gulp-if');
 var nunjucksRender = require('gulp-nunjucks-render');
 var data = require('gulp-data');
+var fs = require('fs');
 
 gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')
@@ -32,6 +33,12 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', ['browserSync', 'sass'], function() {
+  gulp.watch([
+    'app/templates/**.*'
+    'app/pages/**/*.+(html|nunjucks)'
+    'app/data.json'
+    ], ['nunjucks']
+  );
   gulp.watch('app/scss/**/*.scss', ['sass']);
   gulp.watch('app/js/**/*.js', browserSync.reload);
   gulp.watch('app/*.html', browserSync.reload);
@@ -63,15 +70,19 @@ gulp.task('nunjucks', function() {
   nunjucksRender.nunjucks.configure(['app/templates/']);
 
   return gulp.src('app/pages/**/*.+(html|nunjucks)')
+  .pipe(customPlumber('Error Running Nunjucks'))
   // Adding data to Nunjucks
   .pipe(data(function() {
-    return require('./app/data.json')
+    return JSON.parse(fs.readFileSync('./app/data.json'))
   }))
   // Renders template with nunjucks
   .pipe(nunjucksRender({
     path: ['app/templates']
   }))
-  .pipe(gulp.dest('app'));
+  .pipe(gulp.dest('app'))
+  .pipe(browserSync.reload({
+    stream: true
+  }));
 });
 
 function customPlumber(errTitle) {

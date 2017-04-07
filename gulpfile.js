@@ -13,7 +13,10 @@ gulp.task('sass', function() {
     .pipe(customPlumber('Error Running Sass'))
     // Initialize sourcemap
     .pipe(sourcemaps.init())
-    .pipe(sass())
+    .pipe(sass({
+      // Include bower_components and node_modules as import locations
+      includePaths: ['app/bower_components/', 'node_modules/']
+    }))
     .pipe(autoprefixer({
       // Adds prefixes for IE8, IE9 and last 2 versions of all other browsers
       browsers: ['ie 8-9', 'last 2 versions']

@@ -58,6 +58,17 @@ gulp.task('sprites', function() {
   .pipe(gulpIf('*.scss', gulp.dest('app/scss')));
 });
 
+gulp.task('nunjucks', function() {
+  nunjucksRender.nunjucks.configure(['app/templates/']);
+
+  return gulp.src('app/pages/**/*.+(html|nunjucks)')
+  //Renders template with nunjucks
+  .pipe(nunjucksRender({
+    path: ['app/templates']
+  }))
+  .pipe(gulp.dest('app'));
+});
+
 function customPlumber(errTitle) {
   return plumber({
     errorHandler: notify.onError({

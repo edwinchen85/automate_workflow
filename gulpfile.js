@@ -7,6 +7,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var spritesmith = require('gulp.spritesmith');
 var gulpIf = require('gulp-if');
+var nunjucksRender = require('gulp-nunjucks-render');
 
 gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')

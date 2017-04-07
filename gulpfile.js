@@ -8,6 +8,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var spritesmith = require('gulp.spritesmith');
 var gulpIf = require('gulp-if');
 var nunjucksRender = require('gulp-nunjucks-render');
+var data = require('gulp-data');
 
 gulp.task('sass', function() {
   gulp.src('app/scss/**/*.scss')
@@ -62,7 +63,11 @@ gulp.task('nunjucks', function() {
   nunjucksRender.nunjucks.configure(['app/templates/']);
 
   return gulp.src('app/pages/**/*.+(html|nunjucks)')
-  //Renders template with nunjucks
+  // Adding data to Nunjucks
+  .pipe(data(function() {
+    return require('./app/data.json')
+  }))
+  // Renders template with nunjucks
   .pipe(nunjucksRender({
     path: ['app/templates']
   }))

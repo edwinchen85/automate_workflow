@@ -7,4 +7,13 @@
 <!-- Creating the navigation with activePage = 'home' -->
 {{nav.active('home')}}
 
+<div class="gallery">
+  <!-- Loops through "images" array -->
+  {% for image in images %}
+  <div class="gallery__item">
+    <img src="{{image.src}}" alt="{{image.alt}}"">
+  </div>
+  <% endfor %>
+</div>
+
 {% endblock %}
